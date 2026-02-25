@@ -557,18 +557,16 @@ const PAYLINES_3x5: number[][] = [
   [0, 2, 0, 2, 0], // Line 20 - wide zigzag
 ]
 
-/** Calculate the dynamic max bet based on the player's current balance. */
 export function getDynamicMaxBet(balance: number, themeMinBet: number): number {
-  // Base max bet tiers
-  if (balance >= 500_000) return 100_000
-  if (balance >= 200_000) return 50_000
-  if (balance >= 100_000) return 20_000
-  if (balance >= 50_000) return 10_000
-  if (balance >= 20_000) return 5_000
-  if (balance >= 10_000) return 2_000
-  if (balance >= 5_000) return 1_000
-  if (balance >= 2_000) return 500
-  return Math.max(themeMinBet, Math.floor(balance * 0.2))
+  if (balance >= 100_000) return 50_000;
+
+  if (balance >= 50_000) return 10_000;
+
+  if (balance >= 20_000) return 5_000;
+  if (balance >= 10_000) return 2_000;
+  if (balance >= 5_000) return 1_000;
+
+  return Math.max(themeMinBet, Math.floor(balance * 0.2));
 }
 
 // Calculate win from a grid of symbols
@@ -708,3 +706,11 @@ export function spinReels(theme: SlotTheme): SlotSymbol[][] {
   }
   return grid
 }
+
+/** Ստուգում է՝ արդյոք խաղացողին հասանելի է ռեկլամ նայելու հնարավորությունը */
+export function canWatchAdForCredits(balance: number): boolean {
+  return balance <= 20000;
+}
+
+/** Վերադարձնում է ռեկլամի համար նախատեսված պարգևը */
+export const AD_REWARD_AMOUNT = 10000;

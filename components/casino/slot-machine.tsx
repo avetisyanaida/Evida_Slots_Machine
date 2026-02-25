@@ -10,9 +10,10 @@ import { Volume2, VolumeX, ArrowLeft, Zap, RotateCcw, ChevronDown } from "lucide
 interface SlotMachineProps {
   theme: SlotTheme
   onBack: () => void
+  onWatchAd: () => void
 }
 
-export function SlotMachine({ theme, onBack }: SlotMachineProps) {
+export function SlotMachine({ theme, onBack, onWatchAd }: SlotMachineProps) {
   const {
     credits,
     freeSpins,
@@ -273,6 +274,15 @@ export function SlotMachine({ theme, onBack }: SlotMachineProps) {
         <div className="flex items-center gap-2">
           <span className="text-muted-foreground">Credits:</span>
           <span className="text-primary font-mono font-bold text-lg">{formatNumber(credits)}</span>
+
+          {credits <= 20000 && !spinning && (
+              <button
+                  onClick={onWatchAd}
+                  className="ml-2 px-3 py-1 bg-yellow-500 text-black text-xs font-black rounded-full animate-bounce shadow-lg border border-white"
+              >
+                📺 +10K
+              </button>
+          )}
         </div>
         {freeSpins > 0 && (
           <div className="flex items-center gap-1 text-neon-green font-bold animate-pulse-gold">
